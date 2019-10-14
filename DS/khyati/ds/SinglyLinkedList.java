@@ -1,5 +1,5 @@
 package khyati.ds;
-public class SinglyLinkedList<E> 
+public class SinglyLinkedList<E extends Comparable<E>> 
 {
   //---------------- nested Node class ----------------
   /**
@@ -7,7 +7,7 @@ public class SinglyLinkedList<E>
    * element and to the subsequent node in the list (or null if this
    * is the last node).
    */
-  private static class Node<E> 
+  private static class Node<E extends Comparable<E>>
   {
     /** The element stored at this node */
     private E element;            // reference to the element stored at this node
@@ -36,7 +36,10 @@ public class SinglyLinkedList<E>
     { 
       return element; 
     }
-
+	
+	public void setElement(E val){
+		element=val;
+	}
     /**
      * Returns the node that follows this one (or null if no such node).
      * @return the following node
@@ -49,6 +52,8 @@ public class SinglyLinkedList<E>
      * @param n    the node that should follow this one
      */
     public void setNext(Node<E> n) { next = n; }
+	
+	
   } //----------- end of nested Node class -----------
 
 
@@ -260,6 +265,32 @@ public class SinglyLinkedList<E>
 	}
 	removeLoop(fast);
 	return true;
+  }
+  
+  public void addFirstLast(){
+  addFirstLast(head,head);
+  }
+  
+  private Node<E> temp=null;
+  private void addFirstLast(Node<E> slow,Node<E> fast){
+  	if(fast==null){
+		temp=slow;
+		return;
+	}
+	if(fast.getNext()==null){
+		temp=slow.getNext();
+		return;
+	}
+	
+	addFirstLast(slow.getNext(),fast.getNext().getNext());
+	int val=Integer.parseInt(slow.getElement());
+	int val1=Integer.parseInt(temp.getElement());
+	if(val instanceof Integer && val1 instanceof Integer){
+	val+=val1;
+	val1=val;
+	}
+	slow.setElement(E(val));
+	temp.setElement(E(val1));
   }
   
 }

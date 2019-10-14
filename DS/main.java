@@ -19,6 +19,8 @@ class MainClass{
 		System.out.println(l.findMiddle());
 		System.out.println(l.findNthLast(3));
 		System.out.println(l.isPalindrome());
+		l.addFirstLast();
+		System.out.println(l.toString());
 //		DoublyLinkedList<Integer> l=new DoublyLinkedList<>();
 //		l.addFirst(2);
 //		l.addLast(3);
